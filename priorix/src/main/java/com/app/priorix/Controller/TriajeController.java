@@ -1,5 +1,6 @@
 package com.app.priorix.Controller;
 
+import com.app.priorix.model.entity.Paciente;
 import com.app.priorix.model.entity.Triaje;
 import com.app.priorix.model.entity.Usuario;
 import com.app.priorix.model.node.NodoPaciente;
@@ -40,17 +41,23 @@ public class TriajeController {
     @PostMapping("/triaje/guardar")
 public String guardar(@ModelAttribute Triaje triaje, Authentication auth) {
 
-    // Asignar enfermero
+    // 1. Recuperar el paciente completo de la BD (ajusta el nombre del método según tu PacienteService)
+    Paciente pacienteCompleto = pacienteService.obtenerPorId(triaje.getPaciente().getId());
+    triaje.setPaciente(pacienteCompleto);
+
+    // 2. Ejecutar manualmente tu método para asignar fechas, nivel y prioridad
+    triaje.prePersist();
+
+    // 3. Asignar enfermero
     Usuario enf = usuarioService.buscarPorNombreUsuario(auth.getName());
     triaje.setEnfermero(enf);
 
-    // Guardar triaje
+    // 4. Guardar triaje
     triajeService.guardar(triaje);
 
-    // Crear nodo y enviarlo a lista de espera
-    NodoPaciente nodo = new NodoPaciente(triaje);  // ✔️ ahora esto sí existe
-
-    listaEspera.agregar(nodo); // ✔️ tu servicio usa "agregar"
+    // 5. Crear nodo y enviarlo a lista de espera
+    NodoPaciente nodo = new NodoPaciente(triaje);
+    listaEspera.agregar(nodo);
 
     return "redirect:/enfermero/triaje?success=ok";
 }

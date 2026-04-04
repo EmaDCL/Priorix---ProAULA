@@ -56,12 +56,12 @@
     </thead>
     <tbody>
       <tr th:each="r : ${reportes}">
-        <td th:text="${r.paciente}"></td>
-        <td th:text="${r.medico}"></td>
-        <td th:text="${r.nivelTriaje}"></td>
-        <td th:text="${r.tiempoEspera}"></td>
-        <td th:text="${r.tiempoAtencion}"></td>
-        <td th:text="${#temporals.format(r.fecha, 'dd/MM/yyyy')}"></td>
+        <td th:text="${r['paciente']}"></td>
+        <td th:text="${r['medico']}"></td>
+        <td th:text="${r['nivel']}"></td>
+        <td th:text="${r['tiempoEspera'] != null ? r['tiempoEspera'] : 'N/A'}"></td>
+        <td th:text="${r['tiempoAtencion'] != null ? r['tiempoAtencion'] : 'N/A'}"></td>
+        <td th:text="${r['fecha'] != null ? #temporals.format(r['fecha'], 'dd/MM/yyyy') : 'Sin fecha'}"></td>
       </tr>
     </tbody>
   </table>

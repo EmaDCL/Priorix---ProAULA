@@ -23,6 +23,7 @@ public class ReporteServiceImpl implements ReporteService {
             r.put("nivel", a.getTriaje().getNivel().getColor());
             r.put("estado", a.getEstado().name());
             r.put("medico", a.getMedico().getNombreUsuario());
+            r.put("fecha", a.getTriaje().getFechaRegistro());
             reportes.add(r);
         });
         return reportes;

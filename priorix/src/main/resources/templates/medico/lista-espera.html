@@ -40,22 +40,16 @@
         <tr th:each="nodo : ${lista}">
             <td th:text="${nodo.idTriaje}"></td>
 
-            <!-- PACIENTE -->
-            <td th:text="${nodo.paciente.nombre + ' ' + nodo.paciente.apellido}"></td>
+            <td th:text="${nodo.paciente != null ? nodo.paciente.nombre + ' ' + nodo.paciente.apellido : 'Sin datos de paciente'}"></td>
 
-            <!-- PRIORIDAD -->
             <td th:text="${nodo.prioridad}"></td>
 
-            <!-- NIVEL DE DOLOR -->
             <td th:text="${nodo.nivelDolor}"></td>
 
-            <!-- FECHA -->
-            <td th:text="${#temporals.format(nodo.fechaRegistro, 'yyyy-MM-dd')}"></td>
+            <td th:text="${nodo.fechaRegistro != null ? #temporals.format(nodo.fechaRegistro, 'yyyy-MM-dd') : 'Sin fecha'}"></td>
 
-            <!-- HORA -->
-            <td th:text="${#temporals.format(nodo.horaRegistro, 'HH:mm:ss')}"></td>
+            <td th:text="${nodo.horaRegistro != null ? #temporals.format(nodo.horaRegistro, 'HH:mm:ss') : 'Sin hora'}"></td>
 
-            <!-- BOTÓN ATENDER -->
             <td>
                 <a th:href="@{'/medico/atender/' + ${nodo.idTriaje}}" class="btn-atender">
                     Atender
