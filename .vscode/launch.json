@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PriorixApplication<priorix>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.app.priorix.PriorixApplication",
+            "projectName": "priorix",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

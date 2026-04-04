@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Atención Médica</title>
+    <link rel="stylesheet" th:href="@{/medico/atencion.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Atención del Paciente</h1>
+
+    <!-- DATOS DEL PACIENTE -->
+    <section class="card">
+        <h2>Datos del Paciente</h2>
+
+        <p><strong>Nombre:</strong> <span th:text="${atencion.paciente.nombre}"></span></p>
+        <p><strong>Identificación:</strong> <span th:text="${atencion.paciente.documento}"></span></p>
+    </section>
+
+    <!-- DATOS DEL TRIAJE -->
+    <!-- Datos del paciente -->
+        <div class="card">
+            <h3>Datos del Paciente</h3>
+            <p><strong>Nombre:</strong>
+                <span th:text="${atencion.paciente.nombre + ' ' + atencion.paciente.apellido}"></span>
+            </p>
+
+            <p><strong>Documento:</strong>
+                <span th:text="${atencion.paciente.documento}"></span>
+            </p>
+        <p><strong>Fecha registro:</strong>
+            <span th:text="${atencion.triaje.fechaRegistro}"></span>
+        </p>
+
+        <p><strong>Hora registro:</strong>
+            <span th:text="${atencion.triaje.horaRegistro}"></span>
+        </p>
+    </section>
+
+
+    <!-- FORMULARIO DE ATENCIÓN -->
+<section class="card">
+    <h2>Registrar Atención</h2>
+
+    <form th:action="@{/medico/atencion/guardar}" method="post" class="formulario">
+
+        <input type="hidden" name="id" th:value="${atencion.id}">
+
+        <label>Motivo de consulta</label>
+        <textarea name="motivoConsulta" required></textarea>
+
+        <label>Diagnóstico</label>
+        <textarea name="diagnostico" required></textarea>
+
+        <label>Tratamiento</label>
+        <textarea name="tratamiento" required></textarea>
+
+        <label>Observaciones</label>
+        <textarea name="observaciones"></textarea>
+
+        <button type="submit" class="btn">Guardar Atención</button>
+    </form>
+
+    <!-- BOTÓN DE HISTORIA CLÍNICA -->
+    <a th:href="@{/medico/historia/crear/{idAtencion}(idAtencion=${atencion.id})}"
+       class="btn-historia">
+       Crear Historia Clínica
+    </a>
+</section>
+</div>
+</body>
+</html>

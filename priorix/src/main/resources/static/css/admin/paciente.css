@@ -1,0 +1,93 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #f5f7fa;
+}
+
+.container {
+  padding: 40px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  color: #2C3E50;
+  margin-bottom: 25px;
+}
+
+/* Buscar */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.search-form input {
+  padding: 10px;
+  border: 1px solid #BDC3C7;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-primary { background: #1ABC9C; }
+.btn-primary:hover { background: #16A085; }
+
+.btn-secondary { background: #7F8C8D; }
+.btn-secondary:hover { background: #636e72; }
+
+.btn-add { background: #2980B9; }
+.btn-add:hover { background: #1F6391; }
+
+.btn-edit { background: #3498DB; padding: 6px 10px; border-radius: 4px; text-decoration: none; color: white; }
+.btn-edit:hover { background: #2980B9; }
+
+.btn-delete { background: #E74C3C; padding: 6px 10px; border-radius: 4px; text-decoration: none; color: white; }
+.btn-delete:hover { background: #C0392B; }
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ECF0F1;
+  text-align: left;
+}
+
+th {
+  background: #2C3E50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Otros */
+.empty-message {
+  text-align: center;
+  color: #7F8C8D;
+  margin-top: 20px;
+}
+
+.actions {
+  text-align: right;
+  margin-top: 20px;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Usuarios | PRIORIX</title>
+  <link rel="stylesheet" th:href="@{/css/admin/usuarios.css}">
+</head>
+<body>
+
+<section class="container">
+  <h2>Gestión de Usuarios</h2>
+
+  <!-- Formulario de creación de usuario -->
+  <form th:action="@{/admin/usuarios/guardar}" method="post" class="form-card">
+    <div class="form-group">
+      <input type="text" name="nombreUsuario" placeholder="Nombre de usuario" required>
+    </div>
+
+    <div class="form-group">
+      <input type="password" name="password" placeholder="Contraseña" required>
+    </div>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Email" required>
+    </div>
+
+
+    <div class="form-group">
+      <select name="rol" required>
+        <option value="" disabled selected>Seleccionar rol</option>
+        <option value="ROLE_ADMIN">Administrador</option>
+        <option value="ROLE_MEDICO">Médico</option>
+        <option value="ROLE_ENFERMERO">Enfermero</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+    </div>
+  </form>
+
+  <!-- Formulario de búsqueda -->
+  <form method="get" th:action="@{/admin/usuarios}" class="search-form">
+    <input type="text" name="q" placeholder="Buscar usuario..." th:value="${query}">
+    <button type="submit" class="btn">Buscar</button>
+    <a th:href="@{/admin/usuarios}" class="btn btn-secondary">Limpiar</a>
+    <a th:href="@{/admin/usuarios/nuevo}" class="btn btn-primary">+ Nuevo Usuario</a>
+
+  </form>
+
+  <!-- Tabla de usuarios -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Rol</th>
+        <th>Emal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="u : ${usuarios}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.nombreUsuario}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.rol}"></td>
+        <td>
+          <a th:href="@{'/admin/usuarios/editar/' + ${u.id}}" class="btn btn-edit">Editar</a>
+          <a th:href="@{'/admin/usuarios/eliminar/' + ${u.id}}"
+             class="btn btn-delete"
+             onclick="return confirm('¿Seguro que deseas eliminar este usuario?')">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div th:if="${#lists.isEmpty(usuarios)}" class="empty-message">
+    <p>No hay usuarios registrados.</p>
+  </div>
+
+  <div class="actions">
+    <a th:href="@{/admin/dashboard}" class="btn">← Volver al Dashboard</a>
+  </div>
+
+</section>
+
+</body>
+</html>

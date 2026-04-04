@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - PRIORIX</title>
+    <link rel="stylesheet" th:href="@{/css/auth/login.css}">
+  
+</head>
+<body>
+    <div class="background"></div>
+    <div class="login-container">
+        <h1 class="title">LOGIN - PRIORIX</h1>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rol">Rol</label>
+                <select id="rol" disabled>
+                    <option>Seleccionado automáticamente</option>
+                    <option>ENFERMERO</option>
+                    <option>MEDICO</option>
+                    <option>ADMIN</option>
+                </select>
+                <small class="rol-info">Tu rol se detectará al iniciar sesión</small>
+            </div>
+
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
+
+            <!-- Mensajes de error o logout -->
+            <p th:if="${param.error}" class="error">Usuario o contraseña incorrectos</p>
+            <p th:if="${param.logout}" class="success">Sesión cerrada correctamente</p>
+            <p th:if="${mensaje}" class="success" th:text="${mensaje}"></p>
+        </form>
+    </div>
+</body>
+</html>

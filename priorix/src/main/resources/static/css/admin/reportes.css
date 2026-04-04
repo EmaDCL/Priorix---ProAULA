@@ -1,0 +1,118 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background-color: #f4f6f8;
+}
+
+.container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  color: #2C3E50;
+  margin-bottom: 25px;
+}
+
+/* ===== Filtros ===== */
+.filtro-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filtro {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  color: #2C3E50;
+  margin-bottom: 5px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #BDC3C7;
+  border-radius: 6px;
+  width: 200px;
+}
+
+input:focus, select:focus {
+  border-color: #1ABC9C;
+  outline: none;
+  box-shadow: 0 0 5px rgba(26, 188, 156, 0.4);
+}
+
+.btn {
+  background: #1ABC9C;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: #16A085;
+}
+
+/* ===== Tabla ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ECF0F1;
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background: #2C3E50;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background: #F9F9F9;
+}
+
+/* ===== Vacío ===== */
+.empty-message {
+  text-align: center;
+  color: #7F8C8D;
+  margin-top: 20px;
+}
+
+/* ===== Botón volver ===== */
+.actions {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.actions a {
+  text-decoration: none;
+  color: white;
+  background-color: #7F8C8D;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+
+.actions a:hover {
+  background-color: #636e72;
+}

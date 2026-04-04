@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Espera</title>
+    <link rel="stylesheet" th:href="@{/css/medico/lista-espera.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Lista de Espera</h2>
+
+    <!-- Mensaje éxito -->
+    <div th:if="${param.success}" class="alert success">
+        ✔ Atención registrada correctamente
+    </div>
+
+    <!-- Mensaje error -->
+    <div th:if="${param.error}" class="alert error">
+        ✖ Ocurrió un error al procesar la solicitud
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID Triaje</th>
+            <th>Paciente</th>
+            <th>Prioridad</th>
+            <th>Nivel Dolor</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Atender</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="nodo : ${lista}">
+            <td th:text="${nodo.idTriaje}"></td>
+
+            <!-- PACIENTE -->
+            <td th:text="${nodo.paciente.nombre + ' ' + nodo.paciente.apellido}"></td>
+
+            <!-- PRIORIDAD -->
+            <td th:text="${nodo.prioridad}"></td>
+
+            <!-- NIVEL DE DOLOR -->
+            <td th:text="${nodo.nivelDolor}"></td>
+
+            <!-- FECHA -->
+            <td th:text="${#temporals.format(nodo.fechaRegistro, 'yyyy-MM-dd')}"></td>
+
+            <!-- HORA -->
+            <td th:text="${#temporals.format(nodo.horaRegistro, 'HH:mm:ss')}"></td>
+
+            <!-- BOTÓN ATENDER -->
+            <td>
+                <a th:href="@{'/medico/atender/' + ${nodo.idTriaje}}" class="btn-atender">
+                    Atender
+                </a>
+            </td>
+        </tr>
+
+        <!-- Si la lista está vacía -->
+        <tr th:if="${#lists.isEmpty(lista)}">
+            <td colspan="7" style="text-align: center; color: gray;">
+                No hay pacientes en lista de espera
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

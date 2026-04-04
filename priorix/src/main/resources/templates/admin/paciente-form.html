@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Paciente | PRIORIX</title>
+  <link rel="stylesheet" th:href="@{/css/admin/paciente-form.css}">
+</head>
+<body>
+
+<section class="form-container">
+  <h2>Registrar Nuevo Paciente</h2>
+
+  <form th:action="@{/admin/pacientes/guardar}" method="post" th:object="${paciente}">
+    <label>Nombre:</label>
+    <input type="text" th:field="*{nombre}" required>
+
+    <label>Apellido:</label>
+    <input type="text" th:field="*{apellido}" required>
+
+    <label>Documento:</label>
+    <input type="text" th:field="*{documento}" required>
+
+    <label>Edad:</label>
+    <input type="number" th:field="*{edad}" required>
+
+    <label>Teléfono:</label>
+    <input type="text" th:field="*{telefono}">
+
+    <label>Fecha de nacimiento:</label>
+    <input type="date" th:field="*{fechaNacimiento}">
+
+    <div class="actions">
+      <button type="submit" class="btn-save">Guardar</button>
+      <a th:href="@{/admin/pacientes}" class="btn-cancel">Cancelar</a>
+    </div>
+  </form>
+</section>
+
+</body>
+</html>

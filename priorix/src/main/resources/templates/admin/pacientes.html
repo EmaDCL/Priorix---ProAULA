@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Pacientes | PRIORIX</title>
+  <link rel="stylesheet" th:href="@{/css/admin/paciente.css}">
+</head>
+<body>
+
+<section class="container">
+  <h2>Gestión de Pacientes</h2>
+
+  <!-- Buscador -->
+  <form method="get" th:action="@{/admin/pacientes}" class="search-form">
+    <input type="text" name="q" placeholder="Buscar por nombre o documento..." th:value="${query}">
+    <button type="submit" class="btn">Buscar</button>
+    <a th:href="@{/admin/pacientes}" class="btn btn-secondary">Limpiar</a>
+    <a th:href="@{/admin/pacientes/nuevo}" class="btn btn-primary">+ Nuevo Paciente</a>
+  </form>
+
+  <!-- Tabla de pacientes -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Documento</th>
+        <th>Edad</th>
+        <th>Teléfono</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="p : ${pacientes}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.nombre}"></td>
+        <td th:text="${p.apellido}"></td>
+        <td th:text="${p.documento}"></td>
+        <td th:text="${p.edad}"></td>
+        <td th:text="${p.telefono}"></td>
+        <td th:text="${#temporals.format(p.fechaNacimiento, 'dd/MM/yyyy')}"></td>
+        <td>
+          <a th:href="@{'/admin/pacientes/editar/' + ${p.id}}" class="btn btn-edit">Editar</a>
+          <a th:href="@{'/admin/pacientes/eliminar/' + ${p.id}}"
+             class="btn btn-delete"
+             onclick="return confirm('¿Seguro que deseas eliminar este paciente?')">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div th:if="${#lists.isEmpty(pacientes)}" class="empty-message">
+    <p>No hay pacientes registrados.</p>
+  </div>
+
+  <div class="actions">
+    <a th:href="@{/admin/dashboard}" class="btn">← Volver al Dashboard</a>
+  </div>
+
+</section>
+
+</body>
+</html>

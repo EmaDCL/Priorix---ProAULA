@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportes y Estadísticas | PRIORIX</title>
+  <link rel="stylesheet" th:href="@{/css/admin/reportes.css}">
+</head>
+<body>
+
+<section class="container">
+  <h2>Reportes y Estadísticas</h2>
+
+  <!-- Filtros de búsqueda -->
+  <form th:action="@{/admin/reportes}" method="get" class="filtro-form">
+    <div class="filtro">
+      <label>Desde:</label>
+      <input type="date" name="fechaInicio" th:value="${fechaInicio}">
+    </div>
+
+    <div class="filtro">
+      <label>Hasta:</label>
+      <input type="date" name="fechaFin" th:value="${fechaFin}">
+    </div>
+
+    <div class="filtro">
+      <label>Nivel de urgencia:</label>
+      <select name="nivel">
+        <option value="">Todos</option>
+        <option value="1">Nivel 1 - Emergencia</option>
+        <option value="2">Nivel 2 - Muy urgente</option>
+        <option value="3">Nivel 3 - Urgente</option>
+        <option value="4">Nivel 4 - Menor urgencia</option>
+        <option value="5">Nivel 5 - No urgente</option>
+      </select>
+    </div>
+
+    <div class="filtro">
+      <label>Médico responsable:</label>
+      <input type="text" name="medico" placeholder="Nombre del médico" th:value="${medico}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generar</button>
+  </form>
+
+  <!-- Tabla de reportes -->
+  <table>
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Médico</th>
+        <th>Nivel de Triaje</th>
+        <th>Tiempo de Espera</th>
+        <th>Duración de Atención</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="r : ${reportes}">
+        <td th:text="${r.paciente}"></td>
+        <td th:text="${r.medico}"></td>
+        <td th:text="${r.nivelTriaje}"></td>
+        <td th:text="${r.tiempoEspera}"></td>
+        <td th:text="${r.tiempoAtencion}"></td>
+        <td th:text="${#temporals.format(r.fecha, 'dd/MM/yyyy')}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div th:if="${#lists.isEmpty(reportes)}" class="empty-message">
+    <p>No hay datos disponibles para los filtros seleccionados.</p>
+  </div>
+
+  <div class="actions">
+    <a th:href="@{/admin/dashboard}" class="btn">← Volver al Dashboard</a>
+  </div>
+</section>
+
+</body>
+</html>

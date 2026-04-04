@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Usuario | PRIORIX</title>
+    <link rel="stylesheet" th:href="@{/css/admin/usuario-form.css}">
+</head>
+<body>
+
+<section class="form-container">
+    <h2>Registrar Nuevo Usuario</h2>
+
+    <form th:action="@{/admin/usuarios/guardar}" method="post" th:object="${usuario}">
+        <label>Nombre de usuario:</label>
+        <input type="text" th:field="*{nombreUsuario}" required>
+
+        <label>Correo electrónico:</label>
+        <input type="email" th:field="*{email}" required>
+
+        <label>Contraseña:</label>
+        <input type="password" th:field="*{password}" required>
+
+        <label>Rol:</label>
+        <select th:field="*{rol}">
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_MEDICO">MÉDICO</option>
+            <option value="ROLE_ENFERMERO">ENFERMERO</option>
+        </select>
+
+        <div class="actions">
+            <button type="submit" class="btn-guardar">Guardar</button>
+            <a th:href="@{/admin/usuarios}" class="btn-cancelar">Cancelar</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>
