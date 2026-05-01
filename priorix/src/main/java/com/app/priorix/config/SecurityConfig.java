@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -59,10 +61,12 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/enfermero/**").hasRole("ENFERMERO")
                 .requestMatchers("/medico/**").hasRole("MEDICO")
+                .requestMatchers("auth/login").permitAll()
 
                 // Todo lo demás requiere autenticación
                 .anyRequest().authenticated()
             )
+            
 
             .formLogin(login -> login
                 .loginPage("/login")
@@ -79,8 +83,21 @@ public class SecurityConfig {
             )
 
             // Deshabilita CSRF para formularios simples (opcional si usas Thymeleaf correctamente)
-            .csrf(csrf -> csrf.disable());
+            .csrf(csrf -> csrf.disable())
 
-        return http.build();
+            .sessionManagement((session) -> session
+                .invalidSessionUrl("/login?invalid-session")
+                .maximumSessions(1)
+                .expiredUrl("/login?session-expired")
+            );
+
+            return http.build();
+
     }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+    
 }

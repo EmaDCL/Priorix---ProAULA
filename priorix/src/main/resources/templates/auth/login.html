@@ -41,5 +41,9 @@
             <p th:if="${mensaje}" class="success" th:text="${mensaje}"></p>
         </form>
     </div>
+
+    <div th:if="${param.expired}" class="alert alert-warning">
+        <p>Su sesión ha expirado. iniciaste sesión en otro dispositivo.</p>
+    </div>
 </body>
 </html>
