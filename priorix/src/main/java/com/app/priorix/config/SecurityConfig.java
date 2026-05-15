@@ -22,33 +22,45 @@ public class SecurityConfig {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final UserDetailsService userDetailsService;
+
+    
+
 
     /**
      * Carga el usuario desde la base de datos y construye el objeto UserDetails para Spring Security.
      */
-    @Bean
+    
+    /*@Bean
     public UserDetailsService userDetailsService() {
         return username -> usuarioRepository.findByNombreUsuario(username)
                 .map(user -> org.springframework.security.core.userdetails.User
-                        .withUsername(user.getNombreUsuario())
+                        .withUsername(user.getUsername())
                         .password(user.getPassword())
                         .roles(user.getRol().name().replace("ROLE_", "")) // Elimina el prefijo ROLE_
                         .build())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + username));
+    }*/
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, UserDetailsService userDetailsService) {
+        this.jwtAuthFilter = jwtAuthFilter;
+        this.userDetailsService = userDetailsService;
     }
 
-    @Bean
+
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    }*/
+   
 
-    @Bean
+    /*@Bean
     public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
-    }
+    }*/
     
     
     @Bean
