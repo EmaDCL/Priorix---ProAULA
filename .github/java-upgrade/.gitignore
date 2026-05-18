@@ -10,3 +10,9 @@ target/
 
 # Ignorar logs
 *.log
+
+# Crea o sobreescribe el .gitignore en la raíz
+echo ".vscode/" > .gitignore
+echo ".env" >> .gitignore
+echo "target/" >> .gitignore
+echo "*.log" >> .gitignore
