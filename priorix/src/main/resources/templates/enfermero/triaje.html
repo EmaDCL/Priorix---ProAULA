@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Triaje</title>
+    <link rel="stylesheet" th:href="@{/css/enfermero/triaje.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Registrar Triaje</h2>
+
+    <!-- Mensaje éxito -->
+    <div th:if="${param.success}" class="alert success">
+        ✔ Triaje registrado correctamente
+    </div>
+
+    <!-- Error paciente no válido -->
+    <div th:if="${param.error}" class="alert error">
+        ✖ Debe seleccionar un paciente válido
+    </div>
+
+    <form th:action="@{/enfermero/triaje/guardar}" th:object="${triaje}" method="post">
+
+        <!-- Paciente -->
+        <label>Paciente:</label>
+        <select th:field="*{paciente.id}">
+            <option value="">Seleccione un paciente</option>
+           <option th:each="p : ${pacientes}"
+        th:value="${p.id}"
+        th:text="${p.nombre + ' ' + p.apellido}">
+</option>
+
+        </select>
+
+        <!-- Síntomas -->
+        <label>Síntomas:</label>
+        <textarea rows="3" th:field="*{sintomas}" placeholder="Describa los síntomas..."></textarea>
+
+        <!-- Nivel de dolor -->
+        <label>Nivel de dolor (0 - 10):</label>
+        <input type="number" min="0" max="10" th:field="*{nivelDolor}">
+
+        <div class="buttons">
+            <a th:href="@{/enfermero/triaje}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar Triaje</button>
+
+    </form>
+</div>
+
+</body>
+</html>

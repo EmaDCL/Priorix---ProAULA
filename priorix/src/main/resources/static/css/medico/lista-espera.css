@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f3f3;
+}
+
+.container {
+    margin: 40px auto;
+    width: 90%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #2c3e50;
+    color: white;
+}
+
+.btn-atender {
+    background: #3498db;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-atender:hover {
+    background: #217dbb;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.success { background: #d4edda; color: #155724; }
+.error { background: #f8d7da; color: #721c24; }

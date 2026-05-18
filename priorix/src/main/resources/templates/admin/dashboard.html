@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración | PRIORIX</title>
+    <!-- CSS propio del Dashboard -->
+    <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}">
+</head>
+<body>
+<section class="dashboard-container">
+    <h1>Panel de Administración</h1>
+    <p>Bienvenido al sistema de gestión hospitalaria PRIORIX.</p>
+
+    <div class="cards-container">
+        <a th:href="@{/admin/usuarios}" class="card">
+            <h3>Gestión de Usuarios</h3>
+            <p>Administra médicos y enfermeros del sistema.</p>
+        </a>
+
+        <a th:href="@{/admin/pacientes}" class="card">
+            <h3>Gestión de Pacientes</h3>
+            <p>Consulta, edita o registra nuevos pacientes.</p>
+        </a>
+
+        <a th:href="@{/admin/reportes}" class="card">
+            <h3>Reportes y Estadísticas</h3>
+            <p>Analiza tiempos de espera y atención.</p>
+        </a>
+    </div>
+     <div class="actions">
+    <a th:href="@{/login}" class="btn">← CERRAR</a>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Activar Cuenta | PRIORIX</title>
+    <link rel="stylesheet" th:href="@{/css/admin/Usuarios.css}">
+</head>
+<body>
+
+<section class="container activacion-container form-card">
+    <h2>Activar tu Cuenta</h2>
+    <p>Ingresa tu correo y el código de 6 dígitos que recibiste.</p>
+
+    <div th:if="${error}" class="error-msg">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:action="@{/activar}" method="post">
+        <div class="form-group">
+            <input type="email" name="email" 
+                th:value="${param.email}" 
+                placeholder="Tu correo electrónico" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="code" placeholder="Código de 6 dígitos" required maxlength="6">
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Activar Cuenta</button>
+        </div>
+    </form>
+</section>
+
+</body>
+</html>

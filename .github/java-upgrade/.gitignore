@@ -1,0 +1,12 @@
+# Ignorar carpeta de compilación
+target/
+*.class
+
+# Ignorar archivos de configuración de VS Code (aquí están tus variables env)
+.vscode/
+
+# Ignorar archivos de variables de entorno
+.env
+
+# Ignorar logs
+*.log

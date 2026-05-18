@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia Clínica</title>
+    <link rel="stylesheet" th:href="@{/css/medico/historia.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Historia Clínica del Paciente</h2>
+
+    <!-- Mostrar datos del paciente -->
+    <div class="patient-info" th:if="${historia != null}">
+        <h3 th:text="${historia.paciente.nombre + ' ' + historia.paciente.apellido}"></h3>
+        <p><strong>Edad:</strong> <span th:text="${historia.paciente.edad}"></span></p>
+    </div>
+
+    <!-- Si el paciente NO tiene historia todavía -->
+    <div class="no-history" th:if="${historia == null}">
+        <p>Este paciente aún no tiene historia clínica registrada.</p>
+
+        <form th:action="@{/historia-clinica/guardar}" method="post">
+            <input type="hidden" name="paciente.id" th:value="${idPaciente}">
+            <button class="btn btn-success">Crear Historia Clínica</button>
+        </form>
+    </div>
+
+    <!-- Historia clínica existente -->
+    <div th:if="${historia != null}">
+
+        <h3>Registros Médicos</h3>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Diagnóstico</th>
+                <th>Tratamiento</th>
+                <th>Médico</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="a : ${historia.atenciones}">
+                <td th:text="${#temporals.format(a.fecha,'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${a.diagnostico}"></td>
+                <td th:text="${a.tratamiento}"></td>
+                <td th:text="${a.medico.nombre + ' ' + a.medico.apellido}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Agregar Nuevo Registro</h3>
+
+        <form th:action="@{/historia-clinica/guardar}" method="post">
+
+            <!-- ID de la historia -->
+            <input type="hidden" name="id" th:value="${historia.id}">
+
+            <!-- ID del paciente -->
+            <input type="hidden" name="paciente.id" th:value="${historia.paciente.id}">
+
+            <label>Diagnóstico:</label>
+            <textarea name="nuevoDiagnostico" rows="3"></textarea>
+
+            <label>Tratamiento:</label>
+            <textarea name="nuevoTratamiento" rows="3"></textarea>
+
+            <button class="btn btn-primary" type="submit">Guardar Registro</button>
+        </form>
+    </div>
+
+    <br>
+
+    <a th:href="@{/medico/lista-espera}" class="btn btn-secondary">Volver</a>
+
+</div>
+
+</body>
+</html>
